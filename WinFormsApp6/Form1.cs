@@ -1,4 +1,6 @@
 using System.Globalization;
+using System.Net;
+using System.Text;
 
 namespace WinFormsApp6
 {
@@ -15,11 +17,23 @@ namespace WinFormsApp6
             // MessageBox.Show(region.EnglishName);
 
 
+            // WebClient wc = new WebClient();
+            // var bytes = wc.DownloadData("https://en.wikipedia.org/wiki/Main_Page");
+            // var str = Encoding.Default.GetString(bytes);
+            // richTextBox1.Text = str;
+
+
+
+            HttpClient client = new HttpClient();
+            var str = client.GetStringAsync("https://en.wikipedia.org/wiki/Main_Page").Result;
+            richTextBox1.Text = str;
+
+
 
 
             var items = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
 
-            List<string> list = new List<string>(); 
+            List<string> list = new List<string>();
 
             foreach (CultureInfo cul in items)
             {
@@ -94,10 +108,10 @@ namespace WinFormsApp6
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-           // if (e.Control && e.KeyCode == Keys.S)
-           // {
-               lbl_keycode.Text= e.KeyCode.ToString();
-           //}
+            // if (e.Control && e.KeyCode == Keys.S)
+            // {
+            lbl_keycode.Text = e.KeyCode.ToString();
+            //}
         }
 
 
